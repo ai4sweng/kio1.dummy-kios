@@ -39,7 +39,7 @@ These preserve twelve-agent sequential and parallel KIO1 dispatch coverage and v
 
 ## Operations and Limits
 
-`make up` starts detached and waits for health. Use `make status`, `make logs`, `make stop`, and `make down`; `down` does not delete the external network or KIO1 data. Ctrl+C in a foreground run stops the dummy stack, not UI or KIO1. Health reports agent ID and `dummy: true`; it does not indicate real execution capability.
+On the server, run `make server-build && make server-run`. These are aliases for `make build` and `make up`: the stack starts detached, waits for health, and keeps running after SSH logout. Docker uses the `unless-stopped` restart policy. Use `make status`, `make logs`, `make stop`, and `make down`; `down` does not delete the external network or KIO1 data. Ctrl+C in a foreground run stops the dummy stack, not UI or KIO1. Health reports agent ID and `dummy: true`; it does not indicate real execution capability.
 
 Rebuild and recreate after code changes: `make build up`. Preserve KIO1's data and do not prune unrelated Docker resources. Inspect only new task logs with `docker compose logs -f --tail 0 --no-log-prefix --no-color`; append `kio7` to inspect one agent.
 

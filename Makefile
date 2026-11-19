@@ -7,9 +7,9 @@ export KIO_DUMMY_NETWORK
 COMPOSE = $(DOCKER) compose -f compose.yaml
 SOURCES := dummy_kios/ tests/test_dummy_kios.py tests/test_integration.py
 
-.PHONY: help install test test-cov test-integration format format-check lint typecheck check ci build network run up logs status stop down
+.PHONY: help install test test-cov test-integration format format-check lint typecheck check ci build network run up server-build server-run logs status stop down
 help:
-	@printf 'Targets: install test test-cov test-integration check format-check ci build run up logs status stop down\n'
+	@printf 'Targets: install test test-cov test-integration check format-check ci build run up server-build server-run logs status stop down\n'
 install:
 	python3 -m venv $(VENV)
 	$(PYTHON) -m pip install -r requirements-dev.txt
@@ -40,6 +40,8 @@ run: network
 	$(COMPOSE) up --no-log-prefix --no-color
 up: network
 	$(COMPOSE) up -d --wait
+server-build: build
+server-run: up
 logs:
 	$(COMPOSE) logs -f --no-log-prefix --no-color
 status:
