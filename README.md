@@ -43,4 +43,6 @@ On the server, run `make server-build && make server-run`. These are aliases for
 
 Rebuild and recreate after code changes: `make build up`. Preserve KIO1's data and do not prune unrelated Docker resources. Inspect only new task logs with `docker compose logs -f --tail 0 --no-log-prefix --no-color`; append `kio7` to inspect one agent.
 
+If older containers fail with `PermissionError` while importing `dummy_kios`, rebuild with `make server-build` and recreate with `docker compose up -d --wait --force-recreate`.
+
 Use synthetic data only. Bodies and malformed bounded JSON are printed without redaction. Dummies do not implement authentication, durable idempotency, capability validation, deadlines, durable results, or real UAV operations. Repeated tasks are printed again. Never expose receivers publicly or interpret their acknowledgement as completed work.

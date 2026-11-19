@@ -3,6 +3,7 @@ FROM python:3.12-slim
 WORKDIR /app
 ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 KIO_AGENT_ID=KIO3
 COPY dummy_kios/ ./dummy_kios/
+RUN chmod -R u=rwX,go=rX /app/dummy_kios
 USER 65534:65534
 EXPOSE 8000
 
