@@ -39,10 +39,6 @@ These preserve twelve-agent sequential and parallel KIO1 dispatch coverage and v
 
 ## Operations and Limits
 
-On the server, run `make server-build && make server-run`. These are aliases for `make build` and `make up`: the stack starts detached, waits for health, and keeps running after SSH logout. Docker uses the `unless-stopped` restart policy. Use `make status`, `make logs`, `make stop`, and `make down`; `down` does not delete the external network or KIO1 data. Ctrl+C in a foreground run stops the dummy stack, not UI or KIO1. Health reports agent ID and `dummy: true`; it does not indicate real execution capability.
-
-Rebuild and recreate after code changes: `make build up`. Preserve KIO1's data and do not prune unrelated Docker resources. Inspect only new task logs with `docker compose logs -f --tail 0 --no-log-prefix --no-color`; append `kio7` to inspect one agent.
-
-If older containers fail with `PermissionError` while importing `dummy_kios`, rebuild with `make server-build` and recreate with `docker compose up -d --wait --force-recreate`.
+For `server`, see the [deployment runbook](docs/deployment.md) for checkout, network and registry setup, health verification, updates, and troubleshooting. Ctrl+C in a local foreground run stops the dummy stack, not UI or KIO1.
 
 Use synthetic data only. Bodies and malformed bounded JSON are printed without redaction. Dummies do not implement authentication, durable idempotency, capability validation, deadlines, durable results, or real UAV operations. Repeated tasks are printed again. Never expose receivers publicly or interpret their acknowledgement as completed work.
